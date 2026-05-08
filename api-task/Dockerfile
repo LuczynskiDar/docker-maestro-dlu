@@ -25,6 +25,7 @@ ENV PATH="/api-task/.venv/bin:$PATH" \
     PYTHONUNBUFFERED=1
 
 ENV ENVIRONMENT=dev
+RUN uv sync --frozen --no-cache
 
 EXPOSE 2025
 
@@ -42,11 +43,8 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 WORKDIR /api-task
 COPY pyproject.toml uv.lock ./
 
-# Install depndencies
-RUN uv sync --frozen --no-cache --no-dev
-
-# Remove uv
-RUN rm /bin/uv /bin/uvx
+# Install depndencies and remove uv
+RUN uv sync --frozen --no-cache --no-dev && rm /bin/uv /bin/uvx
 
 # COPY --chown=app:app . .
 
@@ -60,8 +58,7 @@ ENV PATH="/api-task/.venv/bin:$PATH" \
 
 # COPY --chown=app:app . .
 
-RUN groupadd --gid 500 app \
-    && useradd --uid 500 --gid app app
+RUN groupadd --gid 500 app && useradd --uid 500 --gid app --no-create-home app
 USER app:app
 
 EXPOSE 2026
