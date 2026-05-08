@@ -29,8 +29,8 @@ docker container run -d -p 2026:2026 --name api-task3 api-task:0.3
 ## Tag image
 
 ```bash
-docker tag api-task:0.1 rayzki/api-task:0.1
-docker tag api-task:0.1 rayzki/api-task:latest
+docker tag api-task:0.3 rayzki/api-task:0.3
+docker tag api-task:0.3 rayzki/api-task:latest
 ```
 
 ## Pusgh image
@@ -42,7 +42,7 @@ docker push rayzki/api-task:latest
 
 ## Scripts
 
-### Automating in prod.sh:
+### Automating in prod.sh
 
 ```bash
   #!/usr/bin/env bash
