@@ -1,0 +1,50 @@
+# Środowisko wirtualne
+.venv/
+
+# Pliki środowiskowe (sekrety!)
+.env
+.env-dev
+.env-prod
+.env-*
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Testy i coverage
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Git
+.git/
+.gitignore
+
+# Docker (nie kopiuj samego siebie)
+Dockerfile
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logi
+*.log
+logs/
+
+# Dokumentacja
+README.md
+docs/
+
+# CI/CD
+.github/
