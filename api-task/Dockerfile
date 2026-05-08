@@ -38,6 +38,9 @@ FROM python:${PYTHON_VERSION}-slim AS production
 ARG ENVIRONMENT=prod
 ENV ENVIRONMENT=$ENVIRONMENT
 
+ARG VERSION=0.0.0
+ENV VERSION=$VERSION
+
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /api-task

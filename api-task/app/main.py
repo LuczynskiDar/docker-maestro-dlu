@@ -5,14 +5,16 @@ from dotenv import load_dotenv
 # load_dotenv()
 
 ENVIRONMENT = os.getenv('ENVIRONMENT','dev')
+VERSION = os.getenv('VERSION', '0.0.0')
 
 app =  FastAPI()
+
 
 @app.get('/health')
 def health_check():
     return {
         'status': 'ok',
         'name': 'api-task',
-        'version': '1.0',
-        'env': f"{ENVIRONMENT}",
+        'version': VERSION,
+        'env': ENVIRONMENT,
     }
