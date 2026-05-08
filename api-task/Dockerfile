@@ -33,34 +33,19 @@ EXPOSE 2025
 CMD ["sh", "-c", "uv run pytest ; uv run fastapi dev app/main.py --host 0.0.0.0 --port 2025"]
 
 # Stage 3 - prod environment
-FROM python:${PYTHON_VERSION}-slim AS production
-
-ARG ENVIRONMENT=prod
-ENV ENVIRONMENT=$ENVIRONMENT
-
+FROM builder AS production                                                                                                                                                             
+                                                                                                                                                                                    
 ARG VERSION=0.0.0
 ENV VERSION=$VERSION
-
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
-
-WORKDIR /api-task
-COPY pyproject.toml uv.lock ./
-
-# Install depndencies and remove uv
-RUN uv sync --frozen --no-cache --no-dev && rm /bin/uv /bin/uvx
-
-# COPY --chown=app:app . .
-
-# Copy app
-COPY ./app /api-task/app
-
 
 ENV PATH="/api-task/.venv/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# COPY --chown=app:app . .
+# Remove uv and uvx
+RUN rm /bin/uv /bin/uvx
 
+# COPY --chown=app:app . .
 RUN groupadd --gid 500 app && useradd --uid 500 --gid app --no-create-home app
 USER app:app
 
