@@ -2,9 +2,9 @@ import os, sys
 from fastapi import FastAPI
 from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
-ENVIRONMENT = os.getenv('ENV','dev')
+ENVIRONMENT = os.getenv('ENVIRONMENT','dev')
 
 app =  FastAPI()
 
